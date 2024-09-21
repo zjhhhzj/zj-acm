@@ -1,0 +1,17 @@
+正弦和角公式：
+sin(x+y)=sinxcosy+cosxsiny
+
+余弦和角公式：
+cos(x+y)=cosxcosy−sinxsiny
+
+正切和角公式：
+tan(x+y)=(tanx+tany)/(1−tanxtany)
+
+正弦差角公式：
+sin(x−y)=sinxcosy−cosxsiny
+
+余弦差角公式：
+con(x−y)=cosxcosy+sinxsiny
+
+正切差角公式：
+tan(x−y)=(tanx−tany)/(1+tanxtany)
