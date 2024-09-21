@@ -1,0 +1,27 @@
+n个点m条边,朴素方法有n**3,m**2,nm做法,此做法优化到m*sqrt(m)
+具体操作为将无向图转变为有向图,其中度数小连度数大,编号小连编号大
+ll n,m,ans,ds[N];
+vector<int>e[N];
+PII p[N<<1];
+void solve() {
+	cin>>n>>m;
+	int u,v;
+	for(int i=1;i<=m;i++){
+		cin>>u>>v;p[i]={u,v};
+		ds[u]++,ds[v]++;
+	}
+	for(int i=1;i<=m;i++){
+		auto [u,v]=p[i];
+		if(ds[u]>ds[v]||(ds[u]==ds[v]&&u>v))swap(u,v);
+		e[u].push_back(v);
+	}
+	for(int u=1;u<=n;u++){
+		for(auto v:e[u])f[v]=u;
+		for(auto v:e[u]){
+			for(auto it:e[v]){
+				if(f[it]==u)ans++;
+			}
+		}
+	}
+	cout<<ans;
+}
