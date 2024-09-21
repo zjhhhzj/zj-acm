@@ -1,0 +1,22 @@
+自定义比较函数
+struct myComp{
+    bool operator()(const your_type &a,const your_type &b){
+            return a.data-b.data>0;
+        }
+}
+set<int,myComp>s;
+
+lower_bound(key_value) ，返回第一个大于等于key_value的定位器
+cout<<*s.lower_bound(2)<<endl;
+
+// 插入元素  
+mySet.insert(3);  
+
+// 查找元素
+mySet.find(3) != mySet.end()
+
+// 删除元素
+mySet.erase(4);
+
+//不去重
+multiset
