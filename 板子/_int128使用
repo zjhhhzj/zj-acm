@@ -1,0 +1,33 @@
+范围为39位数
+170141183460469231731687303715884105728~170141183460469231731687303715884105727
+小心关闭同步流，可能发生错误
+__int128 read() {
+	__int128 x = 0, f = 1;
+	char ch = getchar();
+	while (ch < '0' || ch > '9') {
+		if (ch == '-')
+			f = -1;
+		ch = getchar();
+	}
+	while (ch >= '0' && ch <= '9') {
+		x = x * 10 + ch - '0';
+		ch = getchar();
+	}
+	return x * f;
+}
+void write(__int128 x) {
+	if (x < 0) {
+		putchar('-');
+		x = -x;
+	}
+	stack<int>p;
+	while (x) {
+		p.push(x % 10);
+		x /= 10;
+	}
+	while (p.size()) {
+		cout << p.top();
+		p.pop();
+	}
+}
+n=read();write(n);
