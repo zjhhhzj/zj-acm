@@ -1,0 +1,28 @@
+ll n,m,a[N],ans,b[N];
+void srt(int l,int mid,int r){
+    int id1=l,id2=mid+1,id=l;
+    while(id1<=mid&&id2<=r){
+        if(a[id1]<=a[id2]){
+            b[id++]=a[id1++];
+        }else{
+            ans+=mid-id1+1;
+            b[id++]=a[id2++];
+        }
+    }
+    while(id1<=mid)b[id++]=a[id1++];
+    while(id2<=r)b[id++]=a[id2++];
+    for(int i=l;i<=r;i++)a[i]=b[i];
+}
+void divide(int l,int r){
+    if(l==r)return;
+    int mid=l+r>>1;
+    divide(l,mid);
+    divide(mid+1,r);
+    srt(l,mid,r);
+}
+void solve() {
+    cin>>n;
+    for(int i=1;i<=n;i++)cin>>a[i];
+    divide(1,n);
+    cout<<ans;
+}
