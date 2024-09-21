@@ -1,0 +1,2 @@
+sort(vt.begin(),vt.end());
+vt.erase(unique(vt.begin(),vt.end()),vt.end());
