@@ -1,0 +1,56 @@
+ll n,m,a[N];
+struct Tree{
+    int l,r,len;
+	ll sm,add;
+}t[N*4];
+void build(int id,int l,int r){
+    if(l==r){
+        t[id]={l,r,1,a[l],0};
+        return;
+    }
+    int mid=l+r>>1;
+    build(id<<1,l,mid);
+    build(id<<1|1,mid+1,r);
+    t[id]={l,r,t[id<<1].len+t[id<<1|1].len,t[id<<1].sm+t[id<<1|1].sm,0};
+}
+void push_down(int id){
+	if(t[id].add==0)return;
+	t[id<<1].add=t[id<<1].add+t[id].add;
+	t[id<<1|1].add=t[id<<1|1].add+t[id].add;
+	t[id<<1].sm=t[id<<1].sm+t[id].add*t[id<<1].len;
+	t[id<<1|1].sm=t[id<<1|1].sm+t[id].add*t[id<<1|1].len;
+	t[id].add=0;
+}
+void update_add(int id,int L,int R,int l,int r,ll w){
+	if(l>R||r<L)return;
+	if(l<=L&&R<=r){
+		t[id].sm=t[id].sm+t[id].len*w;
+		if(L!=R)t[id].add=t[id].add+w;
+	}else{
+		int mid=L+R>>1;
+		push_down(id);
+		update_add(id<<1,L,mid,l,r,w);
+		update_add(id<<1|1,mid+1,R,l,r,w);
+		t[id].sm=t[id<<1].sm+t[id<<1|1].sm;
+	}
+}
+ll qry(int id,int L,int R,int l,int r){
+	if(R<l||L>r)return 0;
+    if(l<=L&&R<=r)return t[id].sm;
+    int mid=L+R>>1;
+    push_down(id);
+    return qry(id<<1,L,mid,l,r)+qry(id<<1|1,mid+1,R,l,r);
+}
+void solve() {
+	cin>>n>>m;
+	ll opt,x,y,w;
+    for(int i=1;i<=n;i++)cin>>a[i];
+    build(1,1,n);
+    while(m--){
+        cin>>opt>>x>>y;
+        if(opt==1){
+            cin>>w;
+            update_add(1,1,n,x,y,w);
+        }else cout<<qry(1,1,n,x,y)<<'\n';
+    }
+}
