@@ -1,0 +1,8 @@
+//c++整行输入
+string str;
+getline(cin,str);//读入string
+
+char str2[1024];
+cin.getline(str2,1024);//读入char数组
+cin.get()//输入换行
+
