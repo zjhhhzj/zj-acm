@@ -1,0 +1,28 @@
+int fa[MAXN], rank[MAXN];
+
+inline void init(int n)//初始化
+{
+    for (int i = 1; i <= n; ++i)
+    {
+        fa[i] = i;
+        rank[i] = 1;
+    }
+}
+
+int find(int x)
+{
+    return x == fa[x] ? x : (fa[x] = find(fa[x]));
+}
+
+inline void merge(int x, int y)//按秩合并
+{
+    int fx = find(x), fy = find(y);    //先找到两个根节点
+    if (rank[fx] <= rank[fy])
+        fa[fx] = fy;
+    else
+        fa[fy] = fx;
+    if (rank[fx] == rank[fy] && fx != fy)
+        rank[fy]++;                   //如果深度相同且根节点不同，则新的根节点的深度+1
+}
+
+merge(x, y+ n);//多种类增加并查集
